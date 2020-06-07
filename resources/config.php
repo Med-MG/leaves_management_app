@@ -3,7 +3,7 @@
 ob_start();
 session_start();
 
-//session_destroy();
+// session_destroy();
 
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR); // Now DS will become / or \ depending on the system se use.
 

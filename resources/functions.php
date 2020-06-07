@@ -27,7 +27,7 @@ function login_users() {
         $username = !empty($_POST['username']) ? trim($_POST['username']) : null;
         $passwordAttempt = !empty($_POST['password']) ? trim($_POST['password']) : null;
 
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
+        $sql = "SELECT * FROM users WHERE username = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$username]);
         $user = $stmt->fetch();
@@ -40,9 +40,11 @@ function login_users() {
             
             if(MD5($passwordAttempt) === $user->password){
                 $_SESSION['user_id'] = $user->id;
+                $_SESSION['name'] = $user->full_name;
+                $_SESSION['profile_pic'] = $user->photo_profile;
                 $_SESSION['admin'] = $user->username;
                 $_SESSION['logged_in'] = time();
-                redirect('../Public/admin/index.php');
+                redirect('../public/admin/index.php');
                 exit;
             } else {
                 redirect('./index.php?error=Incorrect username or password combination! try again b');
