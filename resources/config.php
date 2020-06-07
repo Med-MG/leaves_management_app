@@ -5,18 +5,18 @@ session_start();
 
 //session_destroy();
 
-defined('DS') ? null : define('DS4', DIRECTORY_SEPARATOR); // Now DS will become / or \ depending on the system se use.
+defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR); // Now DS will become / or \ depending on the system se use.
 
 
 //__DIR__ gives you the whole path of the server
 // __FILE__ gives you the whole path of the server in till the file it self
 
-defined('TEMPLATE_FRONT') ? null : define('TEMPLATE_FRONT', __DIR__ . DS . '/template/front');
-defined('TEMPLATE_BACK') ? null : define('TEMPLATE_BACK', __DIR__ . DS . '/template/back');
+defined('TEMPLATE_FRONT') ? null : define('TEMPLATE_FRONT', __DIR__ . DS . "templates/front");
+defined('TEMPLATE_BACK') ? null : define('TEMPLATE_BACK', __DIR__ . DS . "templates/back");
 
 defined('DB_HOST') ? null : define('DB_HOST', 'localhost');
-defined('DB_USER') ? null : define('DB_USER', 'root');
-defined('DB_PASSWORD') ? null : define('DB_PASSWORD', '');
+defined('DB_USER') ? null : define('DB_USER', 'Med');
+defined('DB_PASS') ? null : define('DB_PASS', 'med0155');
 defined('DB_NAME') ? null : define('DB_NAME', 'conge_db');
 
 
