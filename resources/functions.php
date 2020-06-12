@@ -40,7 +40,7 @@ function login_users() {
             
             if(MD5($passwordAttempt) === $user->password){
                 $_SESSION['user_id'] = $user->id;
-                $_SESSION['name'] = $user->full_name;
+                $_SESSION['name'] = $user->name . " " . $user->surname;
                 $_SESSION['profile_pic'] = $user->photo_profile;
                 $_SESSION['admin'] = $user->username;
                 $_SESSION['logged_in'] = time();
@@ -65,5 +65,67 @@ function login_users() {
         }
     }
 }
+
+
+//****  User Management **** /
+function add_users() {
+    //
+}
+
+function delete_users() {
+    //
+}
+
+function update_users(){
+    //
+}
+
+
+//****  Request Management **** /
+
+function request_leave(){
+    //
+}
+
+function display_leaves_request(){
+    //
+}
+
+function approve_disapprove_request() {
+    //
+}
+
+function single__leave_request() {
+    //
+}
+
+function update_request() {
+    //
+}
+
+function delete_request() {
+    //
+}
+
+
+//****  Leave Management */
+function add_leave() {
+    //
+}
+
+function display_leaves() {
+    //
+}
+
+function update_leave() {
+    //
+}
+
+function delete_leave() {
+    //
+}
+
+
+
 
 ?>

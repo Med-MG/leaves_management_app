@@ -1,3 +1,4 @@
+
 <div class="app-sidebar sidebar-shadow">
     <div class="app-header__logo">
         <div class="logo-src"></div>
@@ -33,7 +34,7 @@
             <ul class="vertical-nav-menu">
                 <!-- Dashboard -->
                 <li>
-                    <a href="index.html" class="mm-active">
+                    <a href="index.php" class="mm-active">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Dashboard
                     </a>
@@ -88,13 +89,13 @@
                 <!-- Employees Management -->
                 <li>
                     <a href="#">
-                    <i class="metismenu-icon pe-7s-eyedropper">
+                    <i class="metismenu-icon pe-7s-eyedropper"></i>
                         Employees
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                     <ul>
                         <li>
-                            <a href="components-tabs.html">
+                            <a href="index.php?add_user">
                                 <i class="metismenu-icon">
                                 </i>Add Employees
                             </a>
@@ -112,7 +113,7 @@
                     <!-- Leave Management-->
                     <li>
                     <a href="#">
-                    <i class="metismenu-icon pe-7s-pendrive">
+                    <i class="metismenu-icon pe-7s-pendrive"></i>
                     Leave Management    
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 
@@ -148,3 +149,4 @@
         </div>
     </div>
 </div>    
+

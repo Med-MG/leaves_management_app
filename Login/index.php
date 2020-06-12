@@ -24,14 +24,14 @@
 </head>
 <body>
 	<div class="limiter">
-				<h3 style="background-color: red;">
+				
+		<div class="container-login100 flex-col">
 					<?php
 						if(isset($_GET['error'])) {
-							echo $_GET['error'];
+							
+							echo '<div class="alert alert-danger fade show pos-relative" role="alert" style="width:49%; bottom: -85px">' . $_GET['error'] . '</div>';
 						}
 					?>
-				</h3>
-		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="images/img-01.png" alt="IMG">
