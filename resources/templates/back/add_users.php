@@ -1,4 +1,7 @@
+<H2>
 <?php add_users(); ?>
+</H2>
+<?php '<h1 style="background-color:blue">'. display_msg(). '</h1> ' ?>
 <div class="app-main__outer">
   <div class="app-main__inner">
     <div class="app-page-title">
@@ -89,12 +92,12 @@
           </div>
         </div>
       </div>
-    </div>
-
+    </div> 
+    <form action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate="" >
     <div class="main-card mb-3 card">
       <div class="card-body">
         <h5 class="card-title">Personal information</h5>
-        <form class="needs-validation" novalidate="">
+        
           <div class="form-row">
             <div class="col-md-4 mb-3">
               <label for="validationCustom01">First name</label>
@@ -142,18 +145,6 @@
               </div>
             </div>
 
-            <!-- <div class="col-md-4 mb-3">
-                                            <label for="validationCustomUsername">Username</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                </div>
-                                                <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required="">
-                                                <div class="invalid-feedback">
-                                                    Please choose a username.
-                                                </div>
-                                            </div>
-                                        </div> -->
           </div>
           <div class="form-row">
             <div class="col-md-6 mb-3">
@@ -191,6 +182,7 @@
               <label for="validationCustom05">Birthday</label>
               <input
                 type="date"
+                name="birthday"
                 class="form-control"
                 id="validationCustom05"
                 placeholder="Birthday"
@@ -201,22 +193,13 @@
               </div>
             </div>
           </div>
-          <!-- <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required="">
-                                            <label class="form-check-label" for="invalidCheck">
-                                                Agree to terms and conditions
-                                            </label>
-                                            <div class="invalid-feedback">
-                                                You must agree before submitting.
-                                            </div>
-                                        </div>
-                                    </div> -->
+
           <div class="form-group">
             <label for="validationCustom02">File</label>
-            <!-- <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required=""> -->
+            <!-- MAX_FILE_SIZE must precede the file input field -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
             <input
-              name="file"
+              name="profile_pic"
               id="exampleFile"
               type="file"
               class="form-control-file"
@@ -229,8 +212,8 @@
               Please uplaod a file
             </div>
           </div>
-          <button class="btn btn-primary" type="submit">Submit form</button>
-        </form>
+          
+       
 
         <script>
           // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -268,143 +251,141 @@
     <div class="main-card mb-3 card">
       <div class="card-body">
         <h5 class="card-title">professional information</h5>
-        <form class="">
+       
           <div class="position-relative row form-group">
-            <label for="exampleEmail" class="col-sm-2 col-form-label"
-              >Email</label
-            >
+            <label for="validationCustomUsername" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-              <input
-                name="email"
-                id="exampleEmail"
-                placeholder="with a placeholder"
-                type="email"
-                class="form-control"
-              />
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                </div>
+                <input type="text" class="form-control" name="username" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required="">
+                <div class="invalid-feedback">
+                    Please choose a username.
+                </div>
+            </div>
             </div>
           </div>
           <div class="position-relative row form-group">
-            <label for="examplePassword" class="col-sm-2 col-form-label"
-              >Password</label
-            >
+            <label for="examplePassword" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
               <input
                 name="password"
                 id="examplePassword"
-                placeholder="password placeholder"
+                placeholder="Password (8 characters minimum)"
+                minlength="8"
                 type="password"
                 class="form-control"
+                required
               />
+              <div class="invalid-feedback">
+                Please choose a valid password (8 characters minimum).
+            </div>
             </div>
           </div>
           <div class="position-relative row form-group">
-            <label for="exampleSelect" class="col-sm-2 col-form-label"
-              >Select</label
-            >
-            <div class="col-sm-10">
-              <select
-                name="select"
-                id="exampleSelect"
-                class="form-control"
-              ></select>
-            </div>
-          </div>
-          <div class="position-relative row form-group">
-            <label for="exampleSelectMulti" class="col-sm-2 col-form-label"
-              >Select Multiple</label
-            >
-            <div class="col-sm-10">
-              <select
-                multiple=""
-                name="selectMulti"
-                id="exampleSelectMulti"
-                class="form-control"
-              ></select>
-            </div>
-          </div>
-          <div class="position-relative row form-group">
-            <label for="exampleText" class="col-sm-2 col-form-label"
-              >Text Area</label
-            >
-            <div class="col-sm-10">
-              <textarea
-                name="text"
-                id="exampleText"
-                class="form-control"
-              ></textarea>
-            </div>
-          </div>
-          <div class="position-relative row form-group">
-            <label for="exampleFile" class="col-sm-2 col-form-label"
-              >File</label
-            >
+            <label for="useremail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
               <input
-                name="file"
-                id="exampleFile"
-                type="file"
-                class="form-control-file"
+                name="email"
+                id="useremail"
+                placeholder="username@congeeapp.com"
+                type="email"
+                class="form-control"
+                required
               />
-              <small class="form-text text-muted"
-                >This is some placeholder block-level help text for the above
-                input. It's a bit lighter and easily wraps to a new line.</small
-              >
+              <div class="invalid-feedback">
+                Please choose a valid email
+            </div>
             </div>
           </div>
-          <fieldset class="position-relative row form-group">
-            <legend class="col-form-label col-sm-2">Radio Buttons</legend>
-            <div class="col-sm-10">
-              <div class="position-relative form-check">
-                <label class="form-check-label"
-                  ><input name="radio2" type="radio" class="form-check-input" />
-                  Option one is this and that—be sure to include why it's
-                  great</label
-                >
-              </div>
-              <div class="position-relative form-check">
-                <label class="form-check-label"
-                  ><input name="radio2" type="radio" class="form-check-input" />
-                  Option two can be something else and selecting it will
-                  deselect option one</label
-                >
-              </div>
-              <div class="position-relative form-check disabled">
-                <label class="form-check-label"
-                  ><input
-                    name="radio2"
-                    disabled=""
-                    type="radio"
-                    class="form-check-input"
-                  />
-                  Option three is disabled</label
-                >
-              </div>
-            </div>
-          </fieldset>
+
+
           <div class="position-relative row form-group">
-            <label for="checkbox2" class="col-sm-2 col-form-label"
-              >Checkbox</label
+            <label for="UserService" class="col-sm-2 col-form-label">Select</label
             >
             <div class="col-sm-10">
-              <div class="position-relative form-check">
-                <label class="form-check-label"
-                  ><input
-                    id="checkbox2"
-                    type="checkbox"
-                    class="form-check-input"
-                  />
-                  Check me out</label
-                >
-              </div>
+              <select name="service" id="UserService" class="form-control">
+
+              <?php display_service_in_form() ?>
+
+
+              </select>
             </div>
           </div>
-          <div class="position-relative row form-check">
-            <div class="col-sm-10 offset-sm-2">
-              <button class="btn btn-secondary">Submit</button>
+
+          <div class="position-relative row form-group">
+            <label for="userole" class="col-sm-2 col-form-label">Role</label>
+            <div class="col-sm-10">
+              <input
+                name="role"
+                id="userole"
+                placeholder="data analyst"
+                type="text"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">
+                Please choose a valid role
+            </div>
             </div>
           </div>
-        </form>
+          <div class="position-relative row form-group">
+            <label for="usersalary" class="col-sm-2 col-form-label">Salary</label>
+            <div class="col-sm-10">
+              <input
+                name="salary"
+                id="usersalary"
+                placeholder="1000"
+                type="number"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">
+                Please choose a valid number
+            </div>
+            </div>
+          </div>
+          <div class="position-relative row form-group">
+            <label for="userpto" class="col-sm-2 col-form-label">sold conge (PTO)</label>
+            <div class="col-sm-10">
+              <input
+                name="pto"
+                id="userpto"
+                placeholder="20 (paid time off)"
+                type="number"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">
+                Please choose a valid number
+            </div>
+            </div>
+          </div>
+          <div class="position-relative row form-group">
+            <label for="userdate" class="col-sm-2 col-form-label">hire date</label>
+            <div class="col-sm-10">
+              <input
+                name="hire_date"
+                id="userdate"
+                type="date"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">
+                Please choose a valid date
+            </div>
+            </div>
+          </div>
+
+          <div class="position-relative row ">
+            <div class="col-sm-10 ">
+              <input type="submit" class="btn btn-primary" value="submit" name="submit" style="width: 12rem; margin-top: 1rem;">
+            </div>
+          </div>
+        
       </div>
     </div>
   </div>
 </div>
+</form>
