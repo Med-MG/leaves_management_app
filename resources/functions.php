@@ -132,6 +132,57 @@ function add_users()
     }
 }
 
+
+function display_users()
+{
+    global $pdo;
+
+    $sql = "SELECT u.id, u.photo_profile, u.name, u.surname, u.role, s.service_name, u.status, u.hire_date FROM users u join service s on u.service_id = s.id WHERE username != 'admin' ";
+    $stmt = $pdo->query($sql)->fetchAll();
+    foreach($stmt as $user){
+        
+        if($user->status == 0){
+            $status = "<div class='badge badge-danger'>Inactive</div>";
+        }
+        if($user->status == 1){
+            $status = "<div class='badge badge-success'>active</div>";
+        }
+
+        echo <<<user
+        <tr>
+        <td class="text-center text-muted">{$user->id}</td>
+        <td>
+            <div class="widget-content p-0">
+                <div class="widget-content-wrapper">
+                    <div class="widget-content-left mr-3">
+                        <div class="widget-content-left">
+                            <img width="40" class="rounded-circle" src="../../resources/uploads/{$user->photo_profile}"
+                                alt="profil picture">
+                        </div>
+                    </div>
+                    <div class="widget-content-left flex2">
+                        <div class="widget-heading"> {$user->name} {$user->surname} </div>
+                        <div class="widget-subheading opacity-7">{$user->role}</div>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td class="text-center"> {$user->service_name} </td>
+        <td class="text-center">
+            {$status}
+        </td>
+        <td class="text-center"> {$user->hire_date} </td>
+        <td class="text-center">
+            <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only"><i class="pe-7s-note" style="font-size: 1rem;"></i> Edit </button>
+            <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-delete-user" style="font-size: 1rem;"></i></button>
+        </td>
+    </tr>
+user;
+
+    }
+}
+
+
 function delete_users()
 {
     //
@@ -141,6 +192,8 @@ function update_users()
 {
     //
 }
+
+
 
 //****  Request Management **** /
 

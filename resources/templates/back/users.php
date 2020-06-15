@@ -29,35 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center text-muted">#345</td>
-                            <td>
-                                <div class="widget-content p-0">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left mr-3">
-                                            <div class="widget-content-left">
-                                                <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg"
-                                                    alt="profil picture">
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-left flex2">
-                                            <div class="widget-heading">John Doe</div>
-                                            <div class="widget-subheading opacity-7">Web Developer</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center">Madrid</td>
-                            <td class="text-center">
-                                <div class="badge badge-warning">Pending</div>
-                            </td>
-                            <td class="text-center">10-15-2020</td>
-                            <td class="text-center">
-                                <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only"><i class="pe-7s-note" style="font-size: 1rem;"></i> Edit </button>
-                                <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-delete-user" style="font-size: 1rem;"></i></button>
-                            </td>
-                        </tr>
-                        
+                        <?php display_users() ?>
                     </tbody>
                 </table>
             </div>
