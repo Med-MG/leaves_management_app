@@ -75,12 +75,12 @@ function add_users()
     if (isset($_POST['submit'])) {
         try {
             //Personal info
-            $name = $_POST['name'];
-            $lastname = $_POST['surname'];
-            $cin = $_POST['cin'];
-            $phone = $_POST['phone'];
-            $gender = $_POST['sexe'];
-            $birthday = $_POST['birthday'];
+            $name = trim($_POST['name']);
+            $lastname = trim($_POST['surname']);
+            $cin = trim($_POST['cin']);
+            $phone = trim($_POST['phone']);
+            $gender = trim($_POST['sexe']);
+            $birthday = trim($_POST['birthday']);
             // Handling profile picture
             $profile_pic = $_FILES['profile_pic']['name'];
             $profile_pic_type = $_FILES['profile_pic']['type'];
@@ -105,22 +105,22 @@ function add_users()
             if (!isset($errorMsg)) {
 
                 //professional info
-                $username = $_POST['username'];
+                $username = trim($_POST['username']);
                 $password = MD5($_POST['password']);
-                $email = $_POST['email'];
-                $service = $_POST['service'];
-                $role = $_POST['role'];
-                $salary = $_POST['salary'];
-                $sold_conge = $_POST['pto'];
-                $hire_date = $_POST['hire_date'];
+                $email = trim($_POST['email']);
+                $service = trim($_POST['service']);
+                $role = trim($_POST['role']);
+                $salary = trim($_POST['salary']);
+                $sold_conge = trim($_POST['pto']);
+                $hire_date = trim($_POST['hire_date']);
 
                 $sql = "INSERT INTO users(username, password, email, name, surname, cin, tel, role, salary, hire_date, sexe, birthday, sold_conge, photo_profile, service_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
                 $result = $stmt->execute([$username, $password, $email, $name, $lastname, $cin, $phone, $role, $salary, $hire_date, $gender, $birthday, $sold_conge, $profile_pic, $service]);
                 if ($result) {
                     set_message('File Uploaded Successfully');
-
-                    //  redirect('');
+                    redirect('index.php?users');
+                    
                 } else {
                     set_message('there is an issue with the query');
 
@@ -173,8 +173,16 @@ function display_users()
         </td>
         <td class="text-center"> {$user->hire_date} </td>
         <td class="text-center">
-            <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only"><i class="pe-7s-note" style="font-size: 1rem;"></i> Edit </button>
-            <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger"><i class="pe-7s-delete-user" style="font-size: 1rem;"></i></button>
+            <a href="index?edit_user={$user->id}">
+            <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
+                <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit 
+            </button>
+            </a>
+            <a href="index?users&status={$user->id}">
+            <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
+                <i class="pe-7s-delete-user" style="font-size: 1rem;"></i>
+            </button>
+            </a>
         </td>
     </tr>
 user;
@@ -182,11 +190,27 @@ user;
     }
 }
 
-
-function delete_users()
-{
-    //
+function toggle_status(){
+    global $pdo;
+    if(isset($_GET['status'])){
+        $user_id = $_GET['status'];
+        $stmt_status = $pdo->prepare("SELECT status FROM users WHERE id = ?");
+        $stmt_status->execute([$user_id]);
+        $user_status = $stmt_status->fetch();
+        if($user_status){
+            if($user_status->status == 1){
+                $pdo->prepare('UPDATE users SET status = 0 where id = ?')->execute([$user_id]);
+            } elseif($user_status->status == 0) {
+                $pdo->prepare('UPDATE users SET status = 1 where id = ?')->execute([$user_id]);
+            }
+        }
+    }
 }
+
+// function delete_users()
+// {
+//     //
+// }
 
 function update_users()
 {
