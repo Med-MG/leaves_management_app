@@ -101,7 +101,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="components-accordions.html">
+                            <a href="index.php?users">
                                 <i class="metismenu-icon">
                                 </i>Manage Employees
                             </a>
