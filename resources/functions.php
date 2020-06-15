@@ -214,7 +214,69 @@ function toggle_status(){
 
 function update_users()
 {
-    //
+    global $pdo;
+
+    if (isset($_POST['submit'])) {
+        try {
+            //Personal info
+            $name = trim($_POST['name']);
+            $lastname = trim($_POST['surname']);
+            $cin = trim($_POST['cin']);
+            $phone = trim($_POST['phone']);
+            $gender = trim($_POST['sexe']);
+            $birthday = trim($_POST['birthday']);
+            $user_id = $_POST['user_id'];
+            // Handling profile picture
+            $profile_pic = $_FILES['profile_pic']['name'];
+            $profile_pic_type = $_FILES['profile_pic']['type'];
+            $profile_pic_size = $_FILES['profile_pic']['size'];
+            $profile_pic_temp = $_FILES['profile_pic']['tmp_name'];
+            $upload_path = '../../resources/uploads/'; //setting up ulpoad folder
+            $uploadfile = $upload_path . basename($profile_pic);
+
+            if ($profile_pic_type == "image/jpg" || $profile_pic_type = "image/jpeg" || $profile_pic_type = "image/png" || $profile_pic_type = "image/gif") // check file extension
+            {
+                // You should also check filesize here.
+                if ($profile_pic_size < 5000000) { //check file size 5mb
+                    move_uploaded_file($profile_pic_temp, $uploadfile); // move upload file temperory directory to your upload folder
+                } else {
+                    $errorMsg = "Your file To large PLease Upload 5mb size";
+                }
+
+            } else {
+                $errorMsg = " Upload jpg, jpeg, png, gif file format..... check file extension";
+            }
+
+            if (!isset($errorMsg)) {
+
+                //professional info
+                $username = trim($_POST['username']);
+                $password = MD5($_POST['password']);
+                $email = trim($_POST['email']);
+                $service = trim($_POST['service']);
+                $role = trim($_POST['role']);
+                $salary = trim($_POST['salary']);
+                $sold_conge = trim($_POST['pto']);
+                $hire_date = trim($_POST['hire_date']);
+
+                $sql = "UPDATE users SET username = ?, password = ?, email = ?, name = ?, surname = ?, cin = ?, tel = ?, role = ?, salary = ?, hire_date = ?, sexe = ?, birthday = ?, sold_conge = ?, photo_profile = ?, service_id = ? WHERE id = ? " ;
+                $stmt = $pdo->prepare($sql);
+                $result = $stmt->execute([$username, $password, $email, $name, $lastname, $cin, $phone, $role, $salary, $hire_date, $gender, $birthday, $sold_conge, $profile_pic, $service, $user_id]);
+                if ($result) {
+                    set_message('File Uploaded Successfully');
+                    redirect('index.php?users');
+                    
+                } else {
+                    set_message('there is an issue with the query');
+                    redirect('index.php?users&failed');
+
+
+                }
+            }
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
+    }
 }
 
 
