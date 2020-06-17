@@ -45,6 +45,7 @@ function login_users()
                 $_SESSION['name'] = $user->name . " " . $user->surname;
                 $_SESSION['profile_pic'] = $user->photo_profile;
                 $_SESSION['admin'] = $user->username;
+                $_SESSION['role'] = $user->role;
                 $_SESSION['logged_in'] = time();
                 redirect('../public/admin/index.php');
                 exit;
@@ -58,6 +59,7 @@ function login_users()
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['name'] = $user->name . " " . $user->surname;
                 $_SESSION['profile_pic'] = $user->photo_profile;
+                $_SESSION['role'] = $user->role;
                 $_SESSION['logged_in'] = time();
                 redirect('../Public/index.php');
                 exit;

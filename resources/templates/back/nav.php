@@ -85,7 +85,7 @@
                                     <?php echo $_SESSION['name']; ?>
                                 </div>
                                 <div class="widget-subheading">
-                                    Admin
+                                    <?php echo $_SESSION['role'] ?>
                                 </div>
                             </div>
                             <div class="widget-content-right header-user-info ml-3">
