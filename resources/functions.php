@@ -310,25 +310,90 @@ function delete_request()
     //
 }
 
+
+
 //****  Leave Management */
-function add_leave()
+function add_leave_type()
 {
-    //
+    global $pdo;
+    if (isset($_POST['submit'])) {
+        try {
+            $sql = "INSERT INTO type_conge(conge_name, conge_label, solde_conge) VALUES(?, ?, ?)";
+            $add_service = $pdo->prepare($sql);
+            $add_service->execute([$_POST['leave_name'], $_POST['leave_label'], $_POST['leave_duration']]);
+            redirect('index.php?manage_leave_type');
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
+    }
 }
 
-function display_leaves()
+function display_leave_types()
 {
-    //
+    global $pdo;
+    try {
+
+        $sql = "SELECT * FROM type_conge ";
+        $stmt = $pdo->query($sql)->fetchAll();
+        foreach ($stmt as $leave) {
+
+            echo <<<leave
+        <tr>
+        <td class="text-center text-muted">{$leave->id}</td>
+        <td class="text-center"> {$leave->conge_name} </td>
+        <td class="text-center"> {$leave->conge_label} </td>
+        <td class="text-center"> {$leave->solde_conge} </td>
+        <td class="text-center">
+            <a href="index?edit_leave_type={$leave->id}">
+            <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
+                <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
+            </button>
+            </a>
+            <a href="index?manage_leave_type&delete_leave={$leave->id}">
+            <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
+                <i class="pe-7s-trash" style="font-size: 1rem;"></i>
+            </button>
+            </a>
+        </td>
+    </tr>
+leave;
+        }
+    } catch (PDOException $e) {
+        echo 'query failed' . $e->getMessage();
+    }
 }
 
-function update_leave()
+function update_leave_type()
 {
-    //
+    global $pdo;
+
+    if(isset($_POST['submit'])){
+        try{
+        
+        $sql = "UPDATE `type_conge` SET `conge_name` = ?, `conge_label` = ?, `solde_conge` = ? WHERE `type_conge`.`id` = ?";
+        $update_service = $pdo->prepare($sql);
+        $update_service->execute([ $_POST['leave_name'], $_POST['leave_label'], $_POST['leave_duration'], $_POST['leave_id']  ]);
+        redirect('index.php?manage_leave_type');
+        }catch(PDOException $e) {
+            echo "query failed" . $e->getMessage();
+        }
+    }
+
 }
 
-function delete_leave()
+function delete_leave_type()
 {
-    //
+    global $pdo;
+    if (isset($_GET['delete_leave'])) {
+        try {
+            $sql = "DELETE FROM type_conge WHERE id = ?";
+            $delete_service = $pdo->prepare($sql);
+            $delete_service->execute([$_GET['delete_leave']]);
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
+
+    }
 }
 
 //*** department or services */

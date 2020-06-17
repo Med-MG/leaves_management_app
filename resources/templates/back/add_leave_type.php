@@ -77,7 +77,7 @@
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationCustom01">Leave name</label>
-          <input type="text" class="form-control" id="validationCustom01" placeholder="First name" name="leave_name" value=""
+          <input type="text" class="form-control" id="validationCustom01" placeholder="leave name" name="leave_name" value=""
             required="" />
           <div class="valid-feedback">
             Looks good!
@@ -85,7 +85,7 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">leave label</label>
-          <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" name="leave_lable"
+          <input type="text" class="form-control" id="validationCustom02" placeholder="leave label" name="leave_label"
             value="" required="" />
           <div class="valid-feedback">
             Looks good!
@@ -93,7 +93,7 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">leave duration</label>
-          <input type="number" class="form-control" id="validationCustom02" placeholder="Last name" name="leave_duration"
+          <input type="number" class="form-control" id="validationCustom02" placeholder="leave duration" name="leave_duration"
             value="" required="" />
           <div class="valid-feedback">
             Looks good!
