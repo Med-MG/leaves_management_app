@@ -1,4 +1,6 @@
-<?php add_services(); ?>
+<?php update_service(); ?>
+
+
 <div class="app-page-title">
   <div class="page-title-wrapper">
     <div class="page-title-heading">
@@ -6,9 +8,9 @@
         <i class="pe-7s-graph text-success"> </i>
       </div>
       <div>
-        Add service
+        Add Employees
         <div class="page-title-subheading">
-          Register new service
+          Register new employee
         </div>
       </div>
     </div>
@@ -69,7 +71,18 @@
     </div>
   </div>
 </div>
+<?php 
+
+
+$edit_service_sql = "SELECT * FROM service WHERE id = ?";
+$service_edit = $pdo->prepare($edit_service_sql);
+$service_edit->execute([$_GET['edit_service']]);
+$service_result = $service_edit->fetchAll();
+?>
 <form action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate="">
+
+<?php if($service_result): ?>
+    <?php foreach($service_result as $service): ?>
   <div class="main-card mb-3 card">
     <div class="card-body">
       <h5 class="card-title">service form</h5>
@@ -77,7 +90,8 @@
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationCustom01">service name</label>
-          <input type="text" class="form-control" id="validationCustom01" placeholder="First name" name="service_name" value=""
+          <input type="hidden" name="service_id" value="<?php echo $service->id; ?>">
+          <input type="text" class="form-control" id="validationCustom01" placeholder="First name" name="service_name" value=" <?php echo $service->service_name; ?> "
             required="" />
           <div class="valid-feedback">
             Looks good!
@@ -85,8 +99,8 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">service short name</label>
-          <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" name="service_short_name"
-            value="" required="" />
+          <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" name="service_shortname"
+            value="<?php echo $service->service_shortname; ?>" required="" />
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -98,7 +112,8 @@
         </div>
       </div>
 
-
+    <?php endforeach ?>
+<?php endif ?>
 
       <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields

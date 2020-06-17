@@ -423,9 +423,11 @@ function update_service(){
 
     if(isset($_POST['submit'])){
         try{
-        $sql = "UPDATE service SET service_name = ?, service_shortname = ?, WHERE id = ?";
+        // $sql = "UPDATE service SET service_name = ?, service_shortname = ?, WHERE service.id = ?";
+        $sql = "UPDATE `service` SET `service_name` = ?, `service_shortname` = ? WHERE `service`.`id` = ?";
         $update_service = $pdo->prepare($sql);
-        $update_service->execute([ $_POST['service_name'], $_POST['service_short_name'], $_POST['service_id'] ]);
+        $update_service->execute([ $_POST['service_name'], $_POST['service_shortname'], $_POST['service_id'] ]);
+        redirect('index.php?manage_services');
         }catch(PDOException $e) {
             echo "query failed" . $e->getMessage();
         }

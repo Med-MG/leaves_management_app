@@ -43,6 +43,12 @@ include(TEMPLATE_FRONT . DS . "header.php");
     if(isset($_GET['manage_services'])){
         include(TEMPLATE_BACK . DS . "manage_services.php");
     }
+    if(isset($_GET['edit_service'])){
+        include(TEMPLATE_BACK . DS . "edit_services.php");
+    }
+
+
+
     ?>
         </div>
     </div>
