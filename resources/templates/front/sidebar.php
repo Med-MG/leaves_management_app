@@ -46,77 +46,33 @@
         <li>
           <a href="index.php" class="mm-active">
             <i class="metismenu-icon pe-7s-rocket"></i>
-            Dashboard
+            My profile
           </a>
         </li>
 
         <!-- Services -->
-        <li class="app-sidebar__heading">Services</li>
+        <li class="app-sidebar__heading">Leaves</li>
         <li>
-          <a href="index.php?add_services">
+          <a href="index.php?apply_leave">
             <i class="metismenu-icon"></i>
-            Add service
+            Apply leave
           </a>
         </li>
         <li>
-          <a href="index.php?manage_services">
+          <a href="index.php?leave_history">
             <i class="metismenu-icon"></i>
-            Manage service
+            Leave History
           </a>
         </li>
 
-        <!-- Leaves Types -->
-
-        <li class="app-sidebar__heading">Leave types</li>
+        <!-- Change password -->
 
         <li>
-          <a href="index.php?add_leave_type">
-            <i class="metismenu-icon"> </i>Add Leave types
+          <a href="index.php?change_password">
+            <i class="metismenu-icon"> </i>change password
           </a>
         </li>
-        <li>
-          <a href="index.php?manage_leave_type">
-            <i class="metismenu-icon"> </i>Manage Leave types
-          </a>
-        </li>
-
-        <!-- Employees Management -->
-        <li class="app-sidebar__heading">Employees</li>
-
-        <li>
-          <a href="index.php?add_user">
-            <i class="metismenu-icon"> </i>Add Employees
-          </a>
-        </li>
-        <li>
-          <a href="index.php?users">
-            <i class="metismenu-icon"> </i>Manage Employees
-          </a>
-        </li>
-
-        <!-- Leave Management-->
-        <li class="app-sidebar__heading">Leave Management</li>
-        <li>
-            <a href="components-tabs.html">
-              <i class="metismenu-icon"> </i>All leaves requests
-            </a>
-          </li>
-          <li>
-            <a href="components-accordions.html">
-              <i class="metismenu-icon"> </i>Pending Leaves
-            </a>
-          </li>
-          <li>
-            <a href="components-accordions.html">
-              <i class="metismenu-icon"> </i>Approved Leaves
-            </a>
-          </li>
-          <li>
-            <a href="components-accordions.html">
-              <i class="metismenu-icon"> </i>Rejected Leaves
-            </a>
-          </li>
-
+        
       </ul>
     </div>
   </div>
