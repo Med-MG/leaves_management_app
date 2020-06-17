@@ -56,6 +56,8 @@ function login_users()
 
             if (MD5($passwordAttempt) === $user->password) {
                 $_SESSION['user_id'] = $user->id;
+                $_SESSION['name'] = $user->name . " " . $user->surname;
+                $_SESSION['profile_pic'] = $user->photo_profile;
                 $_SESSION['logged_in'] = time();
                 redirect('../Public/index.php');
                 exit;
