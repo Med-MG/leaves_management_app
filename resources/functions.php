@@ -350,3 +350,18 @@ service;
     }
 
 }
+
+function add_services() {
+    global $pdo;
+    if(isset($_POST['submit'])){
+        try{
+        $sql = "INSERT INTO service(service_name, service_shortname) VALUES(?, ?)";
+        $add_service = $pdo->prepare($sql);
+        $add_service->execute([$_POST['service_name'], $_POST['service_short_name']]);
+        }catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
+    }
+    
+    
+}
