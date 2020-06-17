@@ -1,3 +1,4 @@
+<?php delete_service(); ?>
 <div class="app-page-title">
     <div class="page-title-wrapper">
         <div class="page-title-heading">
@@ -28,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php // display_services() ?>
+                        <?php display_services(); ?>
                     </tbody>
                 </table>
             </div>

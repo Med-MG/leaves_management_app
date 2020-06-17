@@ -120,7 +120,7 @@ function add_users()
                 if ($result) {
                     set_message('File Uploaded Successfully');
                     redirect('index.php?users');
-                    
+
                 } else {
                     set_message('there is an issue with the query');
 
@@ -132,19 +132,18 @@ function add_users()
     }
 }
 
-
 function display_users()
 {
     global $pdo;
 
     $sql = "SELECT u.id, u.photo_profile, u.name, u.surname, u.role, s.service_name, u.status, u.hire_date FROM users u join service s on u.service_id = s.id WHERE username != 'admin' ";
     $stmt = $pdo->query($sql)->fetchAll();
-    foreach($stmt as $user){
-        
-        if($user->status == 0){
+    foreach ($stmt as $user) {
+
+        if ($user->status == 0) {
             $status = "<div class='badge badge-danger'>Inactive</div>";
         }
-        if($user->status == 1){
+        if ($user->status == 1) {
             $status = "<div class='badge badge-success'>active</div>";
         }
 
@@ -175,7 +174,7 @@ function display_users()
         <td class="text-center">
             <a href="index?edit_user={$user->id}">
             <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
-                <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit 
+                <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
             </button>
             </a>
             <a href="index?users&status={$user->id}">
@@ -190,17 +189,18 @@ user;
     }
 }
 
-function toggle_status(){
+function toggle_status()
+{
     global $pdo;
-    if(isset($_GET['status'])){
+    if (isset($_GET['status'])) {
         $user_id = $_GET['status'];
         $stmt_status = $pdo->prepare("SELECT status FROM users WHERE id = ?");
         $stmt_status->execute([$user_id]);
         $user_status = $stmt_status->fetch();
-        if($user_status){
-            if($user_status->status == 1){
+        if ($user_status) {
+            if ($user_status->status == 1) {
                 $pdo->prepare('UPDATE users SET status = 0 where id = ?')->execute([$user_id]);
-            } elseif($user_status->status == 0) {
+            } elseif ($user_status->status == 0) {
                 $pdo->prepare('UPDATE users SET status = 1 where id = ?')->execute([$user_id]);
             }
         }
@@ -259,17 +259,16 @@ function update_users()
                 $sold_conge = trim($_POST['pto']);
                 $hire_date = trim($_POST['hire_date']);
 
-                $sql = "UPDATE users SET username = ?, password = ?, email = ?, name = ?, surname = ?, cin = ?, tel = ?, role = ?, salary = ?, hire_date = ?, sexe = ?, birthday = ?, sold_conge = ?, photo_profile = ?, service_id = ? WHERE id = ? " ;
+                $sql = "UPDATE users SET username = ?, password = ?, email = ?, name = ?, surname = ?, cin = ?, tel = ?, role = ?, salary = ?, hire_date = ?, sexe = ?, birthday = ?, sold_conge = ?, photo_profile = ?, service_id = ? WHERE id = ? ";
                 $stmt = $pdo->prepare($sql);
                 $result = $stmt->execute([$username, $password, $email, $name, $lastname, $cin, $phone, $role, $salary, $hire_date, $gender, $birthday, $sold_conge, $profile_pic, $service, $user_id]);
                 if ($result) {
                     set_message('File Uploaded Successfully');
                     redirect('index.php?users');
-                    
+
                 } else {
                     set_message('there is an issue with the query');
                     redirect('index.php?users&failed');
-
 
                 }
             }
@@ -278,8 +277,6 @@ function update_users()
         }
     }
 }
-
-
 
 //****  Request Management **** /
 
@@ -336,6 +333,7 @@ function delete_leave()
 
 //*** department or services */
 
+//Display services in the adding users Form
 function display_service_in_form()
 {
     global $pdo;
@@ -351,17 +349,55 @@ service;
 
 }
 
-function add_services() {
+//Adding services to the database
+function add_services()
+{
     global $pdo;
-    if(isset($_POST['submit'])){
-        try{
-        $sql = "INSERT INTO service(service_name, service_shortname) VALUES(?, ?)";
-        $add_service = $pdo->prepare($sql);
-        $add_service->execute([$_POST['service_name'], $_POST['service_short_name']]);
-        }catch (PDOException $e) {
+    if (isset($_POST['submit'])) {
+        try {
+            $sql = "INSERT INTO service(service_name, service_shortname) VALUES(?, ?)";
+            $add_service = $pdo->prepare($sql);
+            $add_service->execute([$_POST['service_name'], $_POST['service_short_name']]);
+            redirect('index.php?manage_services');
+        } catch (PDOException $e) {
             echo 'query failed' . $e->getMessage();
         }
     }
-    
-    
 }
+
+//Displaying services in Manage services page
+function display_services()
+{
+    global $pdo;
+    try {
+
+        $sql = "SELECT s.id, s.service_name , s.service_shortname, COUNT(u.username) as employee_count FROM service s LEFT OUTER join users u on s.id = u.service_id GROUP BY u.service_id, s.service_name ORDER BY s.service_shortname ";
+        $stmt = $pdo->query($sql)->fetchAll();
+        foreach ($stmt as $service) {
+
+            echo <<<service
+        <tr>
+        <td class="text-center text-muted">{$service->id}</td>
+        <td class="text-center"> {$service->service_name} </td>
+        <td class="text-center"> {$service->service_shortname} </td>
+        <td class="text-center"> {$service->employee_count} </td>
+        <td class="text-center">
+            <a href="index?edit_service={$service->id}">
+            <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
+                <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
+            </button>
+            </a>
+            <a href="index?manage_services&delete_service={$service->id}">
+            <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
+                <i class="pe-7s-trash" style="font-size: 1rem;"></i>
+            </button>
+            </a>
+        </td>
+    </tr>
+service;
+        }
+    } catch (PDOException $e) {
+        echo 'query failed' . $e->getMessage();
+    }
+}
+
