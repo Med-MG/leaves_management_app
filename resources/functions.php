@@ -417,3 +417,19 @@ function delete_service()
     }
 }
 
+//update services
+function update_service(){
+    global $pdo;
+
+    if(isset($_POST['submit'])){
+        try{
+        $sql = "UPDATE service SET service_name = ?, service_shortname = ?, WHERE id = ?";
+        $update_service = $pdo->prepare($sql);
+        $update_service->execute([ $_POST['service_name'], $_POST['service_short_name'], $_POST['service_id'] ]);
+        }catch(PDOException $e) {
+            echo "query failed" . $e->getMessage();
+        }
+    }
+
+
+}
