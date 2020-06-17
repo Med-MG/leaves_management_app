@@ -401,3 +401,19 @@ service;
     }
 }
 
+//Delete service
+function delete_service()
+{
+    global $pdo;
+    if (isset($_GET['delete_service'])) {
+        try {
+            $sql = "DELETE FROM service WHERE id = ?";
+            $delete_service = $pdo->prepare($sql);
+            $delete_service->execute([$_GET['delete_service']]);
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
+
+    }
+}
+
