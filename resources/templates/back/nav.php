@@ -67,7 +67,7 @@
                             <div class="widget-content-left">
                                 <div class="btn-group">
                                     <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                        <img width="42" class="rounded-circle" src=" <?php echo "../../resources/" . $_SESSION['profile_pic'] ?> " alt="profilepic">
+                                        <img width="42" class="rounded-circle" src=" <?php echo "../../resources/uploads/" . $_SESSION['profile_pic'] ?> " alt="profilepic">
                                         <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                     </a>
                                     <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">

@@ -37,6 +37,9 @@ include(TEMPLATE_FRONT . DS . "header.php");
     if(isset($_GET['edit_user'])){
         include(TEMPLATE_BACK . DS . "edit_user.php");
     }
+    if(isset($_GET['add_service'])){
+        include(TEMPLATE_BACK . DS . "add_services.php");
+    }
     ?>
         </div>
     </div>
