@@ -46,6 +46,15 @@ include(TEMPLATE_FRONT . DS . "header.php");
     if(isset($_GET['edit_service'])){
         include(TEMPLATE_BACK . DS . "edit_services.php");
     }
+    if(isset($_GET['add_leave_type'])){
+        include(TEMPLATE_BACK . DS . "add_leave_type.php");
+    }
+    if(isset($_GET['manage_leave_type'])){
+        include(TEMPLATE_BACK . DS . "manage_leave_type.php");
+    }
+    if(isset($_GET['edit_leave_type'])){
+        include(TEMPLATE_BACK . DS . "edit_leave_type.php");
+    }
 
 
 
