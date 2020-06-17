@@ -71,11 +71,11 @@
 <form action="" method="post" enctype="multipart/form-data" class="needs-validation" novalidate="">
   <div class="main-card mb-3 card">
     <div class="card-body">
-      <h5 class="card-title">Personal information</h5>
+      <h5 class="card-title">service form</h5>
 
       <div class="form-row">
         <div class="col-md-4 mb-3">
-          <label for="validationCustom01">First name</label>
+          <label for="validationCustom01">service name</label>
           <input type="text" class="form-control" id="validationCustom01" placeholder="First name" name="name" value=""
             required="" />
           <div class="valid-feedback">
