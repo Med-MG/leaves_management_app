@@ -19,11 +19,11 @@
 
     <?php 
     if($_SERVER['REQUEST_URI'] == "./public/" || $_SERVER['REQUEST_URI'] == "/public/index.php"){
-    include(TEMPLATE_FRONT . DS . "dashboard.php") ;
+    include(TEMPLATE_FRONT . DS . "myprofile.php") ;
     }
 
-    if(isset($_GET['add_user'])){
-        include(TEMPLATE_FRONT . DS . "add_users.php");
+    if(isset($_GET['apply_leave'])){
+        include(TEMPLATE_FRONT . DS . "apply_leave.php");
     }
 
 

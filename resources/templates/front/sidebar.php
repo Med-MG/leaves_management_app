@@ -45,7 +45,7 @@
         <!-- Dashboard -->
         <li>
           <a href="index.php" class="mm-active">
-            <i class="metismenu-icon pe-7s-rocket"></i>
+            <i class="metismenu-icon pe-7s-id"></i>
             My profile
           </a>
         </li>
@@ -54,22 +54,22 @@
         <li class="app-sidebar__heading">Leaves</li>
         <li>
           <a href="index.php?apply_leave">
-            <i class="metismenu-icon"></i>
+            <i class="metismenu-icon pe-7s-edit"></i>
             Apply leave
           </a>
         </li>
         <li>
           <a href="index.php?leave_history">
-            <i class="metismenu-icon"></i>
+            <i class="metismenu-icon pe-7s-date"></i>
             Leave History
           </a>
         </li>
 
         <!-- Change password -->
-
+        <li class="app-sidebar__heading">Auth</li>
         <li>
           <a href="index.php?change_password">
-            <i class="metismenu-icon"> </i>change password
+            <i class="metismenu-icon pe-7s-attention"></i>change password
           </a>
         </li>
         

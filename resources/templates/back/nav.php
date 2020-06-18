@@ -73,8 +73,6 @@
                                     <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                         <button type="button" tabindex="0" class="dropdown-item">User Account</button>
                                         <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                        <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                        <button type="button" tabindex="0" class="dropdown-item">Actions</button>
                                         <div tabindex="-1" class="dropdown-divider"></div>
                                         <button type="button" tabindex="0" class="dropdown-item"><a href="logout.php">logout</a></button>
                                     </div>
