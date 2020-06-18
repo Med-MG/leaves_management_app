@@ -25,6 +25,9 @@
     if(isset($_GET['apply_leave'])){
         include(TEMPLATE_FRONT . DS . "apply_leave.php");
     }
+    if(isset($_GET['leave_history'])){
+        include(TEMPLATE_FRONT . DS . "leave_history.php");
+    }
 
 
 

@@ -286,7 +286,85 @@ function update_users()
 
 function request_leave()
 {
-    //
+    global $pdo;
+    if (isset($_POST['submit'])) {
+        try {
+            $date = new DateTime();
+            $created_at = $date->format('Y-m-d H:i:s');
+            $sql = "INSERT INTO `demande_conge` (`from_date`, `to_date`, `created_at`, `comment`, `User_id`, `type_conge`) VALUES (?, ?, ?, ?, ?, ?)";
+            $request_leave = $pdo->prepare($sql);
+            $request_leave->execute([$_POST['start_date'], $_POST['end_date'], $created_at ,$_POST['leave_comment'],  $_SESSION['user_id'],  $_POST['leave_type'] ]);
+            // redirect('');
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
+    }
+}
+
+function display_leave_in_form(){
+    global $pdo;
+    $sql = "SELECT id, conge_name FROM type_conge";
+    $leaves = $pdo->query($sql)->fetchAll();
+
+    foreach ($leaves as $leave) {
+        echo <<<leave
+        <option value="{$leave->id}">{$leave->conge_name}</option>;
+leave;
+
+    }
+}
+
+function display_leave_request_history(){
+    
+    global $pdo;
+    try {
+
+        $sql = "SELECT * , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id WHERE dc.User_id =  ?";
+        $stmt = $pdo->prepare($sql);
+        $res = $stmt->execute([$_SESSION['user_id']]);
+        $leave_history = $stmt->fetchAll();
+        if($res){
+                    foreach ($leave_history as $history) {
+
+                if($history->status == 2){
+                    $status = "<div class='badge badge-warning'>Pending</div>";
+                } elseif($history->status == 1){
+                    $status = "<div class='badge badge-success'>Approved</div>";
+                } elseif($history->status == 0) {
+                    $status = "<div class='badge badge-danger'>Rejected</div>";
+                }
+    
+                echo <<<history
+            <tr>
+            <td class="text-center text-muted">{$history->id}</td>
+            <td class="text-left">{$history->conge_name}</td>
+            <td class="text-center"> {$history->from_date} </td>
+            <td class="text-center"> {$history->to_date} </td>
+            <td class="text-center">{$status}</td>
+            <td class="text-center"> {$history->created_at} </td>
+            <td class="text-center">
+                <a href="index?edit_leave_request={$history->id}">
+                <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
+                    <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
+                </button>
+                </a>
+                <a href="index?manage_leave_type&delete_leave_request={$history->id}">
+                <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
+                    <i class="pe-7s-trash" style="font-size: 1rem;"></i>
+                </button>
+                </a>
+            </td>
+        </tr>
+    history;
+            }
+        } else {
+            echo " <tr> <td>No hitory found </td> </tr> ";
+        }
+
+
+    } catch (PDOException $e) {
+        echo 'query failed' . $e->getMessage();
+    }
 }
 
 function display_leaves_request()
@@ -313,8 +391,6 @@ function delete_request()
 {
     //
 }
-
-
 
 //****  Leave Management */
 function add_leave_type()
@@ -371,14 +447,14 @@ function update_leave_type()
 {
     global $pdo;
 
-    if(isset($_POST['submit'])){
-        try{
-        
-        $sql = "UPDATE `type_conge` SET `conge_name` = ?, `conge_label` = ?, `solde_conge` = ? WHERE `type_conge`.`id` = ?";
-        $update_service = $pdo->prepare($sql);
-        $update_service->execute([ $_POST['leave_name'], $_POST['leave_label'], $_POST['leave_duration'], $_POST['leave_id']  ]);
-        redirect('index.php?manage_leave_type');
-        }catch(PDOException $e) {
+    if (isset($_POST['submit'])) {
+        try {
+
+            $sql = "UPDATE `type_conge` SET `conge_name` = ?, `conge_label` = ?, `solde_conge` = ? WHERE `type_conge`.`id` = ?";
+            $update_service = $pdo->prepare($sql);
+            $update_service->execute([$_POST['leave_name'], $_POST['leave_label'], $_POST['leave_duration'], $_POST['leave_id']]);
+            redirect('index.php?manage_leave_type');
+        } catch (PDOException $e) {
             echo "query failed" . $e->getMessage();
         }
     }
@@ -487,20 +563,20 @@ function delete_service()
 }
 
 //update services
-function update_service(){
+function update_service()
+{
     global $pdo;
 
-    if(isset($_POST['submit'])){
-        try{
-        // $sql = "UPDATE service SET service_name = ?, service_shortname = ?, WHERE service.id = ?";
-        $sql = "UPDATE `service` SET `service_name` = ?, `service_shortname` = ? WHERE `service`.`id` = ?";
-        $update_service = $pdo->prepare($sql);
-        $update_service->execute([ $_POST['service_name'], $_POST['service_shortname'], $_POST['service_id'] ]);
-        redirect('index.php?manage_services');
-        }catch(PDOException $e) {
+    if (isset($_POST['submit'])) {
+        try {
+            // $sql = "UPDATE service SET service_name = ?, service_shortname = ?, WHERE service.id = ?";
+            $sql = "UPDATE `service` SET `service_name` = ?, `service_shortname` = ? WHERE `service`.`id` = ?";
+            $update_service = $pdo->prepare($sql);
+            $update_service->execute([$_POST['service_name'], $_POST['service_shortname'], $_POST['service_id']]);
+            redirect('index.php?manage_services');
+        } catch (PDOException $e) {
             echo "query failed" . $e->getMessage();
         }
     }
-
 
 }
