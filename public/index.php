@@ -28,6 +28,9 @@
     if(isset($_GET['leave_history'])){
         include(TEMPLATE_FRONT . DS . "leave_history.php");
     }
+    if(isset($_GET['edit_leave_request'])){
+        include(TEMPLATE_FRONT . DS . "edit_leave_request.php");
+    }
 
 
 

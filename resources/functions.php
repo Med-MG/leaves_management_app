@@ -394,7 +394,7 @@ function update_request()
     if (isset($_POST['submit'])) {
         try {
             // $sql = "UPDATE service SET service_name = ?, service_shortname = ?, WHERE service.id = ?";
-            $sql = "UPDATE `service` SET `service_name` = ?, `service_shortname` = ? WHERE `service`.`id` = ?";
+            $sql = "UPDATE `demande_conge` SET `from_date` = ?, `to_date` = ?, `comment` = ?, `type_conge` = ? WHERE `demande_conge`.`id` = ?;";
             $update_service = $pdo->prepare($sql);
             $update_service->execute([$_POST['service_name'], $_POST['service_shortname'], $_POST['service_id']]);
             redirect('index.php?manage_services');

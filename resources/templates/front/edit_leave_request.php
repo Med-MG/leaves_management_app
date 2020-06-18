@@ -17,10 +17,10 @@
 
 <?php 
 
-$sql = "SELECT * FROM demange_conge WHERE id = ?";
+$sql = "SELECT * FROM demande_conge WHERE id = ?";
 $edit_req = $pdo->prepare($sql);
 $edit_req->execute([$_GET['edit_leave_request']]);
-
+$request_to_edit = $edit_req->fetchAll();
 
 
 ?>
@@ -90,6 +90,7 @@ $edit_req->execute([$_GET['edit_leave_request']]);
 >
 
 <?php if($edit_req): ?>
+    <?php foreach($request_to_edit as $req): ?>
   <div class="main-card mb-3 card">
     <div class="card-body">
       <h5 class="card-title">leave request form</h5>
@@ -113,10 +114,12 @@ $edit_req->execute([$_GET['edit_leave_request']]);
             <div class="col-md-6 mb-3">
               <label for="StartDate">start date</label>
               <div class="input-group">
+                
                 <input
                   type="date"
                   class="form-control"
                   id="StartDate"
+                  value="<?php echo date($req->from_date); ?>"
                   name="start_date"
                   required
                 />
@@ -131,6 +134,7 @@ $edit_req->execute([$_GET['edit_leave_request']]);
               <input
                 type="date"
                 class="form-control"
+                value="<?php echo date($req->to_date); ?>"
                 id="ExpiryDate"
                 name="end_date"
                 required
@@ -152,7 +156,8 @@ $edit_req->execute([$_GET['edit_leave_request']]);
                   class="form-control"
                   rows="4"
                   required
-                ></textarea>
+                ><?= $req->comment ;?>
+            </textarea>
               </div>
               <div class="invalid-feedback">
                 Please provide a valid text
@@ -224,6 +229,7 @@ $edit_req->execute([$_GET['edit_leave_request']]);
     SetMinDate();
       </script>
     </div>
-  </div>
+  </div>    
+    <?php endforeach; ?>
     <?php endif; ?>
 </form>
