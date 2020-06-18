@@ -294,7 +294,8 @@ function request_leave()
             $sql = "INSERT INTO `demande_conge` (`from_date`, `to_date`, `created_at`, `comment`, `User_id`, `type_conge`) VALUES (?, ?, ?, ?, ?, ?)";
             $request_leave = $pdo->prepare($sql);
             $request_leave->execute([$_POST['start_date'], $_POST['end_date'], $created_at ,$_POST['leave_comment'],  $_SESSION['user_id'],  $_POST['leave_type'] ]);
-            // redirect('');
+            set_message("<div class='alert alert-success fade show' role='alert' style='margin-bottom: 40px;'>Your request was submited successfuly</div>");
+            redirect('index.php?leave_history');
         } catch (PDOException $e) {
             echo 'query failed' . $e->getMessage();
         }
@@ -319,7 +320,7 @@ function display_leave_request_history(){
     global $pdo;
     try {
 
-        $sql = "SELECT * , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id WHERE dc.User_id =  ?";
+        $sql = "SELECT dc.id ,dc.from_date, dc.to_date, dc.created_at, dc.status , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id WHERE dc.User_id =  ?";
         $stmt = $pdo->prepare($sql);
         $res = $stmt->execute([$_SESSION['user_id']]);
         $leave_history = $stmt->fetchAll();
@@ -328,10 +329,31 @@ function display_leave_request_history(){
 
                 if($history->status == 2){
                     $status = "<div class='badge badge-warning'>Pending</div>";
+                    $delete_request = 
+                    ' <a href="index?leave_history&delete_leave_request=' . $history->id . ' ">
+                    <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
+                        <i class="pe-7s-trash" style="font-size: 1rem;"></i>
+                    </button>
+                    </a>
+                    ' ;
                 } elseif($history->status == 1){
                     $status = "<div class='badge badge-success'>Approved</div>";
+                    $delete_request = '
+                    <a href="index?leave_history&cant_delete">
+                    <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-secondary">
+                        <i class="pe-7s-trash" style="font-size: 1rem;"></i>
+                    </button>
+                    </a>
+                    ';
                 } elseif($history->status == 0) {
                     $status = "<div class='badge badge-danger'>Rejected</div>";
+                    $delete_request = '
+                    <a href="index?leave_history&cant_delete">
+                    <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-secondary">
+                        <i class="pe-7s-trash" style="font-size: 1rem;"></i>
+                    </button>
+                    </a>
+                    ';
                 }
     
                 echo <<<history
@@ -348,11 +370,7 @@ function display_leave_request_history(){
                     <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
                 </button>
                 </a>
-                <a href="index?manage_leave_type&delete_leave_request={$history->id}">
-                <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
-                    <i class="pe-7s-trash" style="font-size: 1rem;"></i>
-                </button>
-                </a>
+            {$delete_request}
             </td>
         </tr>
     history;
@@ -367,6 +385,46 @@ function display_leave_request_history(){
     }
 }
 
+
+
+function update_request()
+{
+    global $pdo;
+
+    if (isset($_POST['submit'])) {
+        try {
+            // $sql = "UPDATE service SET service_name = ?, service_shortname = ?, WHERE service.id = ?";
+            $sql = "UPDATE `service` SET `service_name` = ?, `service_shortname` = ? WHERE `service`.`id` = ?";
+            $update_service = $pdo->prepare($sql);
+            $update_service->execute([$_POST['service_name'], $_POST['service_shortname'], $_POST['service_id']]);
+            redirect('index.php?manage_services');
+        } catch (PDOException $e) {
+            echo "query failed" . $e->getMessage();
+        }
+    }
+
+}
+
+function delete_leave_request()
+{
+    global $pdo;
+    if(isset($_GET['delete_leave_request'])) {
+        $sql = "DELETE FROM demande_conge WHERE id = ?";
+        $delete_req = $pdo->prepare($sql);
+        $delete_req->execute([$_GET['delete_leave_request']]);
+        if($delete_req){
+            set_message("<div class='alert alert-success fade show' role='alert' style='margin-bottom: 40px;'>request deleted successfuly</div>");
+        } else {
+            set_message("<div class='alert alert-danger fade show' role='alert' style='margin-bottom: 40px;'>request is not deleted query faild</div>");
+        }
+    }
+    if(isset($_GET['cant_delete'])){
+        set_message("<div class='alert alert-warning fade show' role='alert' style='margin-bottom: 40px;'>sorry you can't delete a request once it's been proccessed</div>");
+
+    }
+}
+
+
 function display_leaves_request()
 {
     //
@@ -378,16 +436,6 @@ function approve_disapprove_request()
 }
 
 function single__leave_request()
-{
-    //
-}
-
-function update_request()
-{
-    //
-}
-
-function delete_request()
 {
     //
 }

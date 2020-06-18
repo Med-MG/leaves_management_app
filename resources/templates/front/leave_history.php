@@ -1,4 +1,5 @@
-<?php //delete_service(); ?>
+<?php delete_leave_request() ?>
+<?php display_msg() ?>
 <div class="app-page-title">
     <div class="page-title-wrapper">
         <div class="page-title-heading">
@@ -6,8 +7,8 @@
                 <i class="pe-7s-car icon-gradient bg-mean-fruit">
                 </i>
             </div>
-            <div>Manage your company services
-                <div class="page-title-subheading">here you can modify your services information
+            <div>Manage your leave history
+                <div class="page-title-subheading">here you can edit or delete your leave requests
                 </div>
             </div>
         </div>
