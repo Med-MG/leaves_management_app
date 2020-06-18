@@ -1,4 +1,4 @@
-<?php request_leave() ?>
+<?php update_request() ?>
 <div class="app-page-title">
   <div class="page-title-wrapper">
     <div class="page-title-heading">
@@ -114,7 +114,7 @@ $request_to_edit = $edit_req->fetchAll();
             <div class="col-md-6 mb-3">
               <label for="StartDate">start date</label>
               <div class="input-group">
-                
+                <input type="hidden" name="request_id" value="<?= $_GET['edit_leave_request'] ?>">
                 <input
                   type="date"
                   class="form-control"

@@ -396,8 +396,9 @@ function update_request()
             // $sql = "UPDATE service SET service_name = ?, service_shortname = ?, WHERE service.id = ?";
             $sql = "UPDATE `demande_conge` SET `from_date` = ?, `to_date` = ?, `comment` = ?, `type_conge` = ? WHERE `demande_conge`.`id` = ?;";
             $update_service = $pdo->prepare($sql);
-            $update_service->execute([$_POST['service_name'], $_POST['service_shortname'], $_POST['service_id']]);
-            redirect('index.php?manage_services');
+            $update_service->execute([$_POST['start_date'], $_POST['end_date'] ,$_POST['leave_comment'],  $_POST['leave_type'], $_POST['request_id'] ]);
+            set_message("<div class='alert alert-success fade show' role='alert' style='margin-bottom: 40px;'>request edited successfuly</div>");
+            redirect('index.php?leave_history');
         } catch (PDOException $e) {
             echo "query failed" . $e->getMessage();
         }
