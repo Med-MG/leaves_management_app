@@ -5,41 +5,25 @@ if (isset($_GET['reject_leave_request'])) {
     $sql = "UPDATE demande_conge SET status = 0 WHERE id = ?";
     $stmt = $pdo->prepare($sql);
     $res =
-    $stmt->execute([$_GET['reject_leave_request']]);if ($res) {set_message('
-<div class="alert alert-success fade show"
-  role="alert"
-  style="margin-bottom: 40px;"
->
-  request rejected successfuly
-</div>
-"); }else { set_message("
-<div
-  class="alert alert-danger fade show"
-  role="alert"
-  style="margin-bottom: 40px;"
->
-  There is a problem with the query
-</div>
-');}}
-if (isset($_GET['approve_leave_request'])) {$sql = "UPDATE demande_conge SET status = 1 WHERE id = ?";
+    $stmt->execute([$_GET['reject_leave_request']]);
+    if ($res) {
+        set_message(' <div class="alert alert-success fade show" role="alert" style="margin-bottom: 40px;"> request rejected successfuly </div>'); 
+    }else { 
+        set_message('<div class="alert alert-danger fade show" role="alert" style="margin-bottom: 40px;"> There is a problem with the query </div>');
+    }
+}
+if (isset($_GET['approve_leave_request'])) {
+    $sql = "UPDATE demande_conge SET status = 1 WHERE id = ?";
     $stmt = $pdo->prepare($sql);
-    $res = $stmt->execute([$_GET['approve_leave_request']]);if ($res) {set_message('
-<div
-  class="alert alert-success fade show"
-  role="alert"
-  style="margin-bottom: 40px;"
->
-  request approved successfuly
-</div>
-"); }else { set_message("
-<div
-  class="alert alert-danger fade show"
-  role="alert"
-  style="margin-bottom: 40px;"
->
-  There is a problem with the query
-</div>
-');}}?>
+    $res = $stmt->execute([$_GET['approve_leave_request']]);
+    if ($res) {
+        set_message('<div class="alert alert-success fade show" role="alert" style="margin-bottom: 40px;"> request approved successfuly </div>'); 
+    }
+    else { 
+        set_message('<div class="alert alert-danger fade show" role="alert" style="margin-bottom: 40px;"> There is a problem with the query </div>');
+    }
+}
+?>
 <?php display_msg()?>
 <div class="app-page-title">
   <div class="page-title-wrapper">

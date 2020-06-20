@@ -101,7 +101,7 @@
               <i class="metismenu-icon"> </i>All leaves requests
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="index.php?pending_leaves">
               <i class="metismenu-icon"> </i>Pending Leaves
             </a>
@@ -115,7 +115,7 @@
             <a href="index.php?rejected_leaves">
               <i class="metismenu-icon"> </i>Rejected Leaves
             </a>
-          </li>
+          </li> -->
 
       </ul>
     </div>

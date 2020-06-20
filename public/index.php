@@ -18,7 +18,7 @@
 
 
     <?php 
-    if($_SERVER['REQUEST_URI'] == "./public/" || $_SERVER['REQUEST_URI'] == "/public/index.php"){
+    if($_SERVER['REQUEST_URI'] == "/public/" || $_SERVER['REQUEST_URI'] == "/public/index.php"){
     // include(TEMPLATE_FRONT . DS . "myprofile.php") ;
     include(TEMPLATE_FRONT . DS . "apply_leave.php");
     }

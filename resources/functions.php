@@ -61,7 +61,7 @@ function login_users()
                 $_SESSION['profile_pic'] = $user->photo_profile;
                 $_SESSION['role'] = $user->role;
                 $_SESSION['logged_in'] = time();
-                redirect('../Public/index.php');
+                redirect('../public/index.php');
                 exit;
             } else {
                 redirect('./index.php?error=Incorrect username or password combination! try again A');
