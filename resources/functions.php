@@ -473,12 +473,12 @@ function display_leave_request()
             <td class="text-center"> {$request->created_at} </td>
             <td class="text-center">{$status}</td>
             <td class="text-center">
-                <a href="index?approve_leave_request={$request->id}">
+                <a href="index?leave_requests&approve_leave_request={$request->id}">
                 <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
                     <i class="pe-7s-like2" style="font-size: 1rem;"></i> Approve
                 </button>
                 </a>
-                <a href="index?reject_leave_request={$request->id}">
+                <a href="index?leave_requests&reject_leave_request={$request->id}">
                 <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-danger btn-icon-only">
                     <i class="pe-7s-close-circle" style="font-size: 1rem;"></i> Reject
                 </button>
