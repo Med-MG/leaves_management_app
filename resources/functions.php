@@ -426,13 +426,26 @@ function delete_leave_request()
 }
 
 
-function display_leave_request()
+function display_leave_request($leave_status)
 {
        
     global $pdo;
     try {
+        if($leave_status == "all"){
+            $sql = "SELECT dc.id ,dc.from_date, dc.to_date, dc.created_at, dc.status, dc.comment, u.name, u.surname, u.role, u.photo_profile , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id JOIN users u on u.id = dc.user_id";
+        }
+        if($leave_status == "pending"){
+            $sql = "SELECT dc.id ,dc.from_date, dc.to_date, dc.created_at, dc.status, dc.comment, u.name, u.surname, u.role, u.photo_profile , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id JOIN users u on u.id = dc.user_id where dc.status = 2";
+            
+        }
+        if($leave_status == "rejected"){
+            $sql = "SELECT dc.id ,dc.from_date, dc.to_date, dc.created_at, dc.status, dc.comment, u.name, u.surname, u.role, u.photo_profile , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id JOIN users u on u.id = dc.user_id where dc.status = 0";
 
-        $sql = "SELECT dc.id ,dc.from_date, dc.to_date, dc.created_at, dc.status, dc.comment, u.name, u.surname, u.role, u.photo_profile , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id JOIN users u on u.id = dc.user_id";
+        }
+        if($leave_status == "approved"){
+            $sql = "SELECT dc.id ,dc.from_date, dc.to_date, dc.created_at, dc.status, dc.comment, u.name, u.surname, u.role, u.photo_profile , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id JOIN users u on u.id = dc.user_id where dc.status = 1";
+
+        }
         $stmt = $pdo->query($sql);
         $requests = $stmt->fetchAll();
         if(!empty($requests)){
