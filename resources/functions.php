@@ -426,9 +426,80 @@ function delete_leave_request()
 }
 
 
-function display_leaves_request()
+function display_leave_request()
 {
-    //
+       
+    global $pdo;
+    try {
+
+        $sql = "SELECT dc.id ,dc.from_date, dc.to_date, dc.created_at, dc.status, dc.comment, u.name, u.surname, u.role, u.photo_profile , tp.conge_name FROM demande_conge dc JOIN type_conge tp on dc.type_conge = tp.id JOIN users u on u.id = dc.user_id";
+        $stmt = $pdo->query($sql);
+        $requests = $stmt->fetchAll();
+        if(!empty($requests)){
+                    foreach ($requests as $request) {
+
+                if($request->status == 2){
+                    $status = "<div class='badge badge-warning'>Pending</div>";
+                } elseif($request->status == 1){
+                    $status = "<div class='badge badge-success'>Approved</div>";
+
+                } elseif($request->status == 0) {
+                    $status = "<div class='badge badge-danger'>Rejected</div>";
+                }
+    
+                echo <<<request
+            <tr>
+            <td class="text-center text-muted">{$request->id}</td>
+            <td>
+            <div class="widget-content p-0">
+                <div class="widget-content-wrapper">
+                    <div class="widget-content-left mr-3">
+                        <div class="widget-content-left">
+                            <img width="40" class="rounded-circle" src="../../resources/uploads/{$request->photo_profile}"
+                                alt="profil picture">
+                        </div>
+                    </div>
+                    <div class="widget-content-left flex2">
+                        <div class="widget-heading"> {$request->name} {$request->surname} </div>
+                        <div class="widget-subheading opacity-7">{$request->role}</div>
+                    </div>
+                </div>
+            </div>
+        </td>
+            <td class="text-center">{$request->conge_name}</td>
+            <td class="text-center"> {$request->from_date} </td>
+            <td class="text-center"> {$request->to_date} </td>
+            <td class="text-center"> {$request->comment} </td>
+            <td class="text-center"> {$request->created_at} </td>
+            <td class="text-center">{$status}</td>
+            <td class="text-center">
+                <a href="index?approve_leave_request={$request->id}">
+                <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
+                    <i class="pe-7s-like2" style="font-size: 1rem;"></i> Approve
+                </button>
+                </a>
+                <a href="index?reject_leave_request={$request->id}">
+                <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-danger btn-icon-only">
+                    <i class="pe-7s-close-circle" style="font-size: 1rem;"></i> Reject
+                </button>
+                </a>
+                <a href="index?leave_requests&delete_leave_request={$request->id}">
+                <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
+                    <i class="pe-7s-trash" style="font-size: 1rem;"></i>
+                </button>
+                </a>
+            </td>
+        </tr>
+    request;
+            }
+        } else {
+            echo " <tr> <td>No hitory found </td> </tr> ";
+        }
+
+
+    } catch (PDOException $e) {
+        echo 'query failed' . $e->getMessage();
+    }
 }
 
 function approve_disapprove_request()

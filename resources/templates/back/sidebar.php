@@ -97,22 +97,22 @@
         <!-- Leave Management-->
         <li class="app-sidebar__heading">Leave Management</li>
         <li>
-            <a href="components-tabs.html">
+            <a href="index.php?leave_requests">
               <i class="metismenu-icon"> </i>All leaves requests
             </a>
           </li>
           <li>
-            <a href="components-accordions.html">
+            <a href="index.php?pending_leaves">
               <i class="metismenu-icon"> </i>Pending Leaves
             </a>
           </li>
           <li>
-            <a href="components-accordions.html">
+            <a href="index.php?approved_leaves">
               <i class="metismenu-icon"> </i>Approved Leaves
             </a>
           </li>
           <li>
-            <a href="components-accordions.html">
+            <a href="index.php?rejected_leaves">
               <i class="metismenu-icon"> </i>Rejected Leaves
             </a>
           </li>

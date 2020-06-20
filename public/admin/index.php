@@ -55,6 +55,9 @@ include(TEMPLATE_FRONT . DS . "header.php");
     if(isset($_GET['edit_leave_type'])){
         include(TEMPLATE_BACK . DS . "edit_leave_type.php");
     }
+    if(isset($_GET['leave_requests'])){
+        include(TEMPLATE_BACK . DS . "leave_requests.php");
+    }
 
 
 
