@@ -1,0 +1,1 @@
+echo "silence is good ";
