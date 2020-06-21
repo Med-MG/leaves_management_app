@@ -45,18 +45,18 @@ if (isset($_GET['approve_leave_request'])) {
     <div class="main-card mb-3 card">
       <div class="card-body">
         <h5 class="card-title">Filter requests</h5>
-        <a href="index?leave_requests&all"><button class="mb-2 mr-2 btn btn-alternate">All</button></a>
-        <a href="index?leave_requests&approved">
+        <a href="index.php?leave_requests&all"><button class="mb-2 mr-2 btn btn-alternate">All</button></a>
+        <a href="index.php?leave_requests&approved">
         <button class="mb-2 mr-2 btn btn-success">
           Approved <span class="badge badge-pill badge-light"> <?php echo $pdo->query('SELECT COUNT("status") as status FROM demande_conge where status = 1')->fetch()->status ?> </span>
         </button>
         </a>
-        <a href="index?leave_requests&pending">
+        <a href="index.php?leave_requests&pending">
         <button class="mb-2 mr-2 btn btn-warning">
           Pending <span class="badge badge-pill badge-light"><?php echo $pdo->query('SELECT COUNT("status") as status FROM demande_conge where status = 2')->fetch()->status ?></span>
         </button>
         </a>
-        <a href="index?leave_requests&rejected">
+        <a href="index.php?leave_requests&rejected">
         <button class="mb-2 mr-2 btn btn-danger">
           Rejected <span class="badge badge-pill badge-light"><?php echo $pdo->query('SELECT COUNT("status") as status FROM demande_conge where status = 0')->fetch()->status ?></span>
         </button>

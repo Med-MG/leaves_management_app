@@ -176,12 +176,12 @@ function display_users()
         </td>
         <td class="text-center"> {$user->hire_date} </td>
         <td class="text-center">
-            <a href="index?edit_user={$user->id}">
+            <a href="index.php?edit_user={$user->id}">
             <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
                 <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
             </button>
             </a>
-            <a href="index?users&status={$user->id}">
+            <a href="index.php?users&status={$user->id}">
             <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
                 <i class="pe-7s-delete-user" style="font-size: 1rem;"></i>
             </button>
@@ -330,7 +330,7 @@ function display_leave_request_history(){
                 if($history->status == 2){
                     $status = "<div class='badge badge-warning'>Pending</div>";
                     $delete_request = 
-                    ' <a href="index?leave_history&delete_leave_request=' . $history->id . ' ">
+                    ' <a href="index.php?leave_history&delete_leave_request=' . $history->id . ' ">
                     <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
                         <i class="pe-7s-trash" style="font-size: 1rem;"></i>
                     </button>
@@ -339,7 +339,7 @@ function display_leave_request_history(){
                 } elseif($history->status == 1){
                     $status = "<div class='badge badge-success'>Approved</div>";
                     $delete_request = '
-                    <a href="index?leave_history&cant_delete">
+                    <a href="index.php?leave_history&cant_delete">
                     <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-secondary">
                         <i class="pe-7s-trash" style="font-size: 1rem;"></i>
                     </button>
@@ -348,7 +348,7 @@ function display_leave_request_history(){
                 } elseif($history->status == 0) {
                     $status = "<div class='badge badge-danger'>Rejected</div>";
                     $delete_request = '
-                    <a href="index?leave_history&cant_delete">
+                    <a href="index.php?leave_history&cant_delete">
                     <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-secondary">
                         <i class="pe-7s-trash" style="font-size: 1rem;"></i>
                     </button>
@@ -365,7 +365,7 @@ function display_leave_request_history(){
             <td class="text-center">{$status}</td>
             <td class="text-center"> {$history->created_at} </td>
             <td class="text-center">
-                <a href="index?edit_leave_request={$history->id}">
+                <a href="index.php?edit_leave_request={$history->id}">
                 <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
                     <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
                 </button>
@@ -486,24 +486,24 @@ function display_leave_request($leave_status)
             <td class="text-center"> {$request->created_at} </td>
             <td class="text-center">{$status}</td>
             <td class="text-center">
-                <a href="index?leave_requests&approve_leave_request={$request->id}">
+                <a href="index.php?leave_requests&approve_leave_request={$request->id}">
                 <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
                     <i class="pe-7s-like2" style="font-size: 1rem;"></i> Approve
                 </button>
                 </a>
-                <a href="index?leave_requests&reject_leave_request={$request->id}">
+                <a href="index.php?leave_requests&reject_leave_request={$request->id}">
                 <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-danger btn-icon-only">
                     <i class="pe-7s-close-circle" style="font-size: 1rem;"></i> Reject
                 </button>
                 </a>
-                <a href="index?leave_requests&delete_leave_request={$request->id}">
+                <a href="index.php?leave_requests&delete_leave_request={$request->id}">
                 <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
                     <i class="pe-7s-trash" style="font-size: 1rem;"></i>
                 </button>
                 </a>
             </td>
         </tr>
-    request;
+request;
             }
         } else {
             echo " <tr> <td>No hitory found </td> </tr> ";
@@ -557,12 +557,12 @@ function display_leave_types()
         <td class="text-center"> {$leave->conge_label} </td>
         <td class="text-center"> {$leave->solde_conge} </td>
         <td class="text-center">
-            <a href="index?edit_leave_type={$leave->id}">
+            <a href="index.php?edit_leave_type={$leave->id}">
             <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
                 <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
             </button>
             </a>
-            <a href="index?manage_leave_type&delete_leave={$leave->id}">
+            <a href="index.php?manage_leave_type&delete_leave={$leave->id}">
             <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
                 <i class="pe-7s-trash" style="font-size: 1rem;"></i>
             </button>
@@ -660,12 +660,12 @@ function display_services()
         <td class="text-center"> {$service->service_shortname} </td>
         <td class="text-center"> {$service->employee_count} </td>
         <td class="text-center">
-            <a href="index?edit_service={$service->id}">
+            <a href="index.php?edit_service={$service->id}">
             <button type="button" id="PopoverCustomT-1"class=" btn-wide btn btn-success btn-icon-only">
                 <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
             </button>
             </a>
-            <a href="index?manage_services&delete_service={$service->id}">
+            <a href="index.php?manage_services&delete_service={$service->id}">
             <button type="button" id="PopoverCustomT-1"class=" btn-icon btn-icon-only btn btn-outline-danger">
                 <i class="pe-7s-trash" style="font-size: 1rem;"></i>
             </button>
