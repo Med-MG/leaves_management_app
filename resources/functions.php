@@ -373,7 +373,7 @@ function display_leave_request_history(){
             {$delete_request}
             </td>
         </tr>
-    history;
+history;
             }
         } else {
             echo " <tr> <td>No hitory found </td> </tr> ";
