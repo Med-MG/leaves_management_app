@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^(www.)?http://congeapp.esy.es$
+RewriteCond %{REQUEST_URI} !^/Login/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /Login/$1
+RewriteCond %{HTTP_HOST} ^(www.)?http://congeapp.esy.es$
+RewriteRule ^(/)?$ Login/index.php [L]
+
+RedirectMatch 301 ^/resources/$ http://http://congeapp.esy.es/public
